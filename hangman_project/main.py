@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from hangman_game import HangmanGame
+from game import HangmanGame
 
 
 def get_valid_guess(guessed_letters):
