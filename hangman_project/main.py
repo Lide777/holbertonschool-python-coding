@@ -1,50 +1,38 @@
-#!/usr/bin/python3
-
 from game import HangmanGame
 
 
-def get_valid_guess(guessed_letters):
-    while True:
-        guess = input("Guess a letter: ").lower()
-        if len(guess) != 1:
-            print("Error: please enter exactly one letter.")
-        elif not guess.isalpha():
-            print("Error: that is not a valid letter.")
-        elif guess in guessed_letters:
-            print("Error: you have already guessed that letter.")
-        else:
-            return guess
-
-
-if __name__ == "__main__":
-    guessed_letters = []
-    letter = get_valid_guess(guessed_letters)
-    print(f"Valid letter received: {letter}")
-
-
 def main():
-    word = "python"
-    game = HangmanGame(word)
+    game = HangmanGame()
+    olders = set()
 
-    while not game.is_won() and not game.is_lost():
-        print("\nCurrent word:", game.display_progress())
-        guess = input("Enter a letter: ").strip().lower()
-        if not guess or len(guess) != 1 or not guess.isalpha():
-            print("Invalid input. Enter one letter.")
+    while True:
+        print("\nMot actuel :", game.display_progress())
+        guessed_letter = input(
+            'Entrez une lettre (ou "exit" pour quitter) : ').strip().lower()
+
+        if guessed_letter == 'exit':
+            print("À bientôt !")
+            break
+
+        if len(guessed_letter) != 1:
+            print('Vous devez entrer une seule lettre.')
             continue
-
-        if game.guess(guess):
-            print("Good guess!" if guess in word else "Wrong guess.")
+        elif not guessed_letter.isalpha():
+            print('Ce doit être une lettre.')
+            continue
+        elif guessed_letter in olders:
+            print('Lettre déjà essayée.')
+            continue
         else:
-            print("You already guessed that letter.")
+            olders.add(guessed_letter)
+            game.guess(guessed_letter)
 
-        print(f"Errors: {game.errors}/{game.max_errors}")
-
-    # Game end
-    if game.is_won():
-        print(f"\nYou won Shrek will kiss you! The word was: {game.word}")
-    else:
-        print(f"\nGame over. The word was: {game.word}")
+        if game.is_won():
+            print(f"\nBravo, tu as gagné Shrek va t'embrasser! Le mot était : {game.word}")
+            break
+        elif game.is_lost():
+            print(f"\nTu as perdu. Shrek n'est pas content! Le mot était : {game.word}")
+            break
 
 
 if __name__ == "__main__":

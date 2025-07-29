@@ -1,11 +1,10 @@
-#!/usr/bin/python3
+import random
+
 def get_random_word():
-    import random
-    with open("wordlist.txt") as list:
-        text = list.read().strip()
-    word = text.split()
-    random_word = random.choice(word)
-    print(random_word)
-
-
-get_random_word()
+    try:
+        with open("wordlist.txt", encoding="utf-8") as file:
+            words = file.read().strip().split()
+        return random.choice(words)
+    except FileNotFoundError:
+        print("Erreur : le fichier 'wordlist.txt' est introuvable.")
+        return "python" 
