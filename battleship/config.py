@@ -1,0 +1,2 @@
+BOARD_SIZE = 5
+SHIP_SPECS = [3, 2, 2, 2]
