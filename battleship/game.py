@@ -3,6 +3,7 @@ from board import create_board, print_board
 from ships import create_fleet, deploy_fleet
 from shots import get_valid_shot, get_cpu_shot, process_shot
 
+
 def main():
     player_board = create_board()
     cpu_board = create_board()
@@ -14,7 +15,8 @@ def main():
     cpu_map = deploy_fleet(cpu_board, cpu_fleet)
 
     player_shots = set()
-    cpu_shots = set((r, c) for r in range(BOARD_SIZE) for c in range(BOARD_SIZE))
+    cpu_shots = set((r, c) for r in range(BOARD_SIZE)
+                    for c in range(BOARD_SIZE))
 
     while True:
         print("\nYour Board:")
@@ -40,6 +42,7 @@ def main():
         if all(ship.is_sunk() for ship in player_fleet):
             print("💀 CPU wins!")
             break
+
 
 if __name__ == "__main__":
     main()

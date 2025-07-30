@@ -1,6 +1,7 @@
 import random
 from config import BOARD_SIZE
 
+
 class Ship:
     def __init__(self, length):
         self.length = length
@@ -13,8 +14,10 @@ class Ship:
     def is_sunk(self):
         return self.hits >= self.length
 
+
 def create_fleet(specs):
     return [Ship(length) for length in specs]
+
 
 def place_ship(board, ship):
     while True:
@@ -33,6 +36,7 @@ def place_ship(board, ship):
                 board[r][c] = 'S'
             ship.positions = coords
             return
+
 
 def deploy_fleet(board, fleet):
     coord_map = {}

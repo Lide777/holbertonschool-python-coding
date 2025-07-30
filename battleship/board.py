@@ -1,11 +1,14 @@
 from config import BOARD_SIZE
 
+
 def create_board():
     return [['~' for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
+
 
 def print_headers():
     header = "  " + " ".join(str(i + 1) for i in range(BOARD_SIZE))
     print(header)
+
 
 def print_board(board, hide_ships=False):
     print_headers()

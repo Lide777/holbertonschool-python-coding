@@ -1,6 +1,7 @@
 from config import BOARD_SIZE
 import random
 
+
 def get_valid_shot(tried_shots):
     while True:
         shot = input("Enter target (e.g. B3): ").strip().upper()
@@ -24,19 +25,21 @@ def get_valid_shot(tried_shots):
         else:
             print("Out of bounds.")
 
+
 def get_cpu_shot(available_shots):
     shot = random.choice(list(available_shots))
     available_shots.remove(shot)
     return shot
+
 
 def process_shot(board, coord_map, row, col):
     if (row, col) in coord_map:
         board[row][col] = 'X'
         ship = coord_map[(row, col)]
         ship.register_hit()
-        print("💥 Hit!")
+        print("Hit!")
         if ship.is_sunk():
-            print("🚢 Ship sunk!")
+            print("Ship sunk!")
     else:
         board[row][col] = 'O'
-        print("💦 Miss.")
+        print("Miss.")
